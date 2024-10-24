@@ -1,43 +1,43 @@
 LIST_ACCEPTED_LANGUAGES = ["english", "chinese", "mandarin", "japanese", "korean", "spanish", "vietnamese", "greek"]
 
 
-def convert_language_to_lower(data):
+def convert_to_lower(data, key):
     """
-    Converts the "Language" key for a list of dictionaries to lower.
+    Converts the provided key for a list of dictionaries to lower.
     Need to make lower case to help filter repeated and unaccepted data entries. Will help us later on.
-    :param data: List of dictionaries containing "Language" key.
-    :return: The same list that is accepted as the parameter, this time the "Language" key is converted to lower.
+    :param data: List of dictionaries containing the key param to lower.
+    :param key: The key name as a string for which you are converting its values in the data list of dictionaries to lower.
+    :return: The same list that is accepted as the parameter, this time the specified key is converted to lower.
     """
     for item in data:
-        item["Language"] = item["Language"].lower()
+        item[key] = item[key].lower()
     return data
 
 
-def find_language_frequency(data):
+def find_frequency(data, key):
     """
-    Counts the frequency of each language in the provided list of dictionaries.
+    Counts the frequency of each value for the specified key that is passed as a parameter in the provided list of dictionaries.
     This information can be used to extrapolate the location of origin for trash items.
-    The function is case insensitive.
 
-    :param data: A list of dictionaries, each containing a "Language" key.
-    :return: A list of dictionaries, each containing "Language" and its "Frequency".
+    :param data: A list of dictionaries, each containing the specified key.
+    :param key: The key as a string for which you are finding the frequencies of its values.
+    :return: A list of dictionaries, each containing the key and its "Frequency".
     """
 
-    language_count = []
+    key_count = []
 
     # Iterate through the list of dictionaries
     for item in data:
-        for entry in language_count:
-            if entry["Language"] == item["Language"]:
+        # Iterate through the list and check if the key exists
+        for entry in key_count:
+            if entry[key] == item[key]:
                 entry["Frequency"] += 1  # Increment frequency
                 break
         else:
-            # This else block executes only if the loop iterates over all items
-            # in language_count without encountering a break. If the loop is
-            # exited with a break statement, this else block will not run.
-            language_count.append({"Language": item["Language"], "Frequency": 1})  # Directly use item['Language']
+            # The else block of the for-loop runs only if no break was encountered
+            key_count.append({key: item[key], "Frequency": 1})  # Simply use "Frequency"
 
-    return language_count
+    return key_count
 
 
 def remove_non_accepted_languages(data):
