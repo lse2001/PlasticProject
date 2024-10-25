@@ -3,11 +3,88 @@ from my_functions import *
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+def plot_garbage(countries, frequencies, ax):
+    total_frequency = sum(frequencies)
+    relative_frequencies = [(freq / total_frequency) * 100 for freq in frequencies]
+    sorted_data = sorted(zip(countries, relative_frequencies), key=lambda x: x[1], reverse=True)
+    countries, relative_frequencies = zip(*sorted_data)
+
+    bottoms = np.zeros(1)
+    for i, (country, freq) in enumerate(zip(countries, relative_frequencies)):
+        ax.bar(0, freq, bottom=bottoms, color=plt.cm.tab10(i), label=f"{country} ({freq:.1f}%)")
+        bottoms += freq
+
+    ax.set_ylim(0, 100)
+    ax.set_ylabel('Relative Frequency (%)')
+    ax.set_title('Pacific Ocean Garbage by Country')
+    ax.set_xticks([])
+    ax.set_xlabel('Countries', rotation=45)
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(reversed(handles), reversed(labels), title="Countries", bbox_to_anchor=(1.05, 1), loc='upper left')
+
+
+def plot_color(colors, frequencies2, ax):
+    total_frequency = sum(frequencies2)
+    relative_frequencies = [(freq / total_frequency) * 100 for freq in frequencies2]
+    sorted_data = sorted(zip(colors, relative_frequencies), key=lambda x: x[1], reverse=True)
+    colors, relative_frequencies = zip(*sorted_data)
+
+    color_mapping = {
+        "multi": "limegreen", "black": "black", "orange": "orange", "blue": "blue",
+        "white": "white", "green": "green", "red": "red", "yellow": "yellow",
+        "grey": "grey", "clear": "#d3d3d3", "silver": "silver", "rust": "#b7410e", "pink": "pink"
+    }
+    bottoms = 0.0
+    for i, (color_name, freq) in enumerate(zip(colors, relative_frequencies)):
+        color = color_mapping.get(color_name, "gray")
+        ax.bar(0, freq, bottom=bottoms, color=color, label=f"{color_name} ({freq:.1f}%)")
+        bottoms += freq
+
+    ax.set_ylim(0, 100)
+    ax.set_ylabel('Relative Frequency (%)')
+    ax.set_title('Garbage Composition by Color')
+    ax.set_xticks([])
+    ax.set_xlabel('Colors', rotation=45)
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(reversed(handles), reversed(labels), title="Colors", bbox_to_anchor=(1.05, 1), loc='upper left')
+
+
+def plot_gear(gear_types, frequencies3, ax):
+    total_frequency = sum(frequencies3)
+    relative_frequencies = [(freq / total_frequency) * 100 for freq in frequencies3]
+    sorted_data = sorted(zip(gear_types, relative_frequencies), key=lambda x: x[1], reverse=True)
+    gear_types, relative_frequencies = zip(*sorted_data)
+
+    bottoms = np.zeros(1)
+    for i, (gear, freq) in enumerate(zip(gear_types, relative_frequencies)):
+        ax.bar(0, freq, bottom=bottoms, color=plt.cm.tab10(i), label=f"{gear} ({freq:.1f}%)")
+        bottoms += freq
+
+    ax.set_ylim(0, 100)
+    ax.set_ylabel('Relative Frequency (%)')
+    ax.set_title('Garbage Composition by Gear Type')
+    ax.set_xticks([])
+    ax.set_xlabel('Gear Types', rotation=45)
+    handles, labels = ax.get_legend_handles_labels()
+    ax.legend(reversed(handles), reversed(labels), title="Gear Types", bbox_to_anchor=(1.05, 1), loc='upper left')
+
+
+def plot_all(countries, frequencies, colors, frequencies2, gear_types, frequencies3):
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+
+    plot_garbage(countries, frequencies, axes[0])
+    plot_color(colors, frequencies2, axes[1])
+    plot_gear(gear_types, frequencies3, axes[2])
+
+    plt.tight_layout()
+    plt.show()
+
+
 # ----------------------- MAIN ----------------------- #
 data = []
 with open('HPU Filtered Data.csv', newline='') as file:
     reader = csv.DictReader(file)
-    # treats each row of data as a dictionary
     for row in reader:
         data.append(row)
 
@@ -16,68 +93,37 @@ data = remove_non_accepted_languages(data)
 data = remove_substrings_from_languages(data)
 data = remove_english_substring(data)
 
-
-
 for item in data:
-    # Check if the Language is 'mandarin' and change it to 'chinese'
     if item["Language"] == "mandarin":
         item["Language"] = "chinese"
 
-print(len(data))
 language_frequency = find_frequency(data, "Language")
-print(language_frequency)
-
-
-
 country = map_language_to_country(language_frequency)
-print(country)
 
-# Using list comprehensions to extract country names and frequencies
-countries = [c['country_of_origin'] for c in country]  # Country names
-frequencies = [c['frequency'] for c in country]        # Frequencies
+# Extract country names and frequencies
+countries = [c['country_of_origin'] for c in country]
+frequencies = [c['frequency'] for c in country]
 
 """
 [c['country_of_origin'] for c in country]: This list comprehension iterates over each dictionary c in the country list and extracts the value of 'country_of_origin' to form a new list of country names.
 [c['frequency'] for c in country]: Similarly, this list comprehension extracts the 'frequency' value from each dictionary in country to form a list of frequencies.
 """
 
-# Calculate total frequency
-total_frequency = sum(frequencies)
 
-# Calculate relative frequencies as percentages
-relative_frequencies = [(freq / total_frequency) * 100 for freq in frequencies]
+# Process for color data
+data = convert_to_lower(data, "Color")
+data = [d for d in data if d.get("Color") != ""]
+colors = find_frequency(data, "Color")
+color = [c['Color'] for c in colors]
+frequencies2 = [c['Frequency'] for c in colors]
 
-# Create a list of tuples and sort it in descending order to have more polluting countries at the bottom
-sorted_data = sorted(zip(countries, relative_frequencies), key=lambda x: x[1], reverse=True)
-countries, relative_frequencies = zip(*sorted_data)
 
-# Create a stacked bar chart with a smaller figure size
-plt.figure(figsize=(6, 6))  # Adjusted height to make it smaller
+# Process for gear type data
+data = convert_to_lower(data, "Gear Type")
+allowed_gear_types = {"buoy", "float", "hard plastic", "metal", "line"}
+data = [d for d in data if d.get("Gear Type") in allowed_gear_types]
+gear_types = find_frequency(data, "Gear Type")
+gear = [g['Gear Type'] for g in gear_types]
+frequencies3 = [g['Frequency'] for g in gear_types]
 
-# Create an array to hold the bottom position for each bar
-bottoms = np.zeros(1)  # Only one bar, so we use 1
-
-# Plot each country's percentage as a segment of the stacked bar
-for i, (country, freq) in enumerate(zip(countries, relative_frequencies)):
-    plt.bar(0, freq, bottom=bottoms, color=plt.cm.tab10(i), label=f"{country} ({freq:.1f}%)")
-    bottoms += freq
-
-# Setting the y-axis limit to a smaller range
-plt.ylim(0, 100)  # You can adjust this if needed
-
-# Adding labels and title
-plt.ylabel('Relative Frequency (%)')
-plt.title('Pacific Ocean Garbage and its Countries of Origin')
-plt.xticks([])  # Remove x-axis ticks as we only have one bar
-
-# Add a tilted x-axis label
-plt.xlabel('Countries', rotation=45)
-
-# Customize the legend, reversing the order
-plt.legend(reversed(plt.gca().get_legend_handles_labels()[0]),
-           reversed(plt.gca().get_legend_handles_labels()[1]),
-           title="Countries", bbox_to_anchor=(1.05, 1), loc='upper left')
-
-# Show the plot
-plt.tight_layout()
-plt.show()
+plot_all(countries, frequencies, color, frequencies2, gear, frequencies3)
