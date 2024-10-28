@@ -70,15 +70,29 @@ def plot_gear(gear_types, frequencies3, ax):
     ax.legend(reversed(handles), reversed(labels), title="Gear Types", bbox_to_anchor=(1.05, 1), loc='upper left')
 
 
-def plot_all(countries, frequencies, colors, frequencies2, gear_types, frequencies3):
+def plot_all(countries, frequencies, gear_types, frequencies3, colors, frequencies2):
     fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
+    # Calculate the total number of items for each category
+    total_countries = sum(frequencies)
+    total_gear = sum(frequencies3)
+    total_colors = sum(frequencies2)
+
+    # Plot countries data with total count in the x-axis label
     plot_garbage(countries, frequencies, axes[0])
-    plot_color(colors, frequencies2, axes[1])
-    plot_gear(gear_types, frequencies3, axes[2])
+    axes[0].set_xlabel(f'Countries ({total_countries} items)', rotation=45)
+
+    # Plot gear data with total count in the x-axis label
+    plot_gear(gear_types, frequencies3, axes[1])
+    axes[1].set_xlabel(f'Gear Types ({total_gear} items)', rotation=45)
+
+    # Plot color data with total count in the x-axis label
+    plot_color(colors, frequencies2, axes[2])
+    axes[2].set_xlabel(f'Colors ({total_colors} items)', rotation=45)
 
     plt.tight_layout()
     plt.show()
+
 
 
 # ----------------------- MAIN ----------------------- #
@@ -126,4 +140,9 @@ gear_types = find_frequency(data, "Gear Type")
 gear = [g['Gear Type'] for g in gear_types]
 frequencies3 = [g['Frequency'] for g in gear_types]
 
-plot_all(countries, frequencies, color, frequencies2, gear, frequencies3)
+
+print(sum(frequencies))
+print(sum(frequencies3))
+print(sum(frequencies2))
+
+plot_all(countries, frequencies, gear, frequencies3, color, frequencies2)
