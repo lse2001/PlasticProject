@@ -10,7 +10,11 @@ def convert_to_lower(data, key):
     :return: The same list that is accepted as the parameter, this time the specified key is converted to lower.
     """
     for item in data:
-        item[key] = item[key].lower()
+        # Use get() method to safely access the key (returns None if key doesn't exist)
+        value = item.get(key)
+        # Only convert if value is a string
+        if isinstance(value, str):
+            item[key] = value.lower()
     return data
 
 
@@ -50,10 +54,12 @@ def remove_non_accepted_languages(data):
     filtered_data = []
 
     for item in data:
-        for language in LIST_ACCEPTED_LANGUAGES:
-            if language in item["Language"]:
-                filtered_data.append(item)
-
+        # Check if the Language field is not NaN and is a string
+        if isinstance(item["Language"], str):
+            for language in LIST_ACCEPTED_LANGUAGES:
+                if language in item["Language"]:
+                    filtered_data.append(item)
+                    break  # No need to check other languages if one is found
     return filtered_data
 
 
@@ -70,11 +76,14 @@ def remove_substrings_from_languages(data):
 
     # Iterate through the list of dictionaries
     for item in data:
-        for substring in substrings_to_remove:
-            # Check if the substring is in the 'Language' string before replacing
-            if substring in item["Language"]:
-                item["Language"] = item["Language"].replace(substring, "")
-
+        # Safely get the Language value
+        value = item.get('Language')
+        if isinstance(value, str):  # Ensure it's a string before processing
+            for substring in substrings_to_remove:
+                # Check if the substring is in the Language string before replacing
+                if substring in value:
+                    value = value.replace(substring, "")
+            item['Language'] = value
     return data
 
 
@@ -87,9 +96,8 @@ def remove_english_substring(data):
     :return: The modified list of dictionaries with 'english' removed from 'Language' values when applicable.
     """
     for item in data:
-        if "english" in item["Language"] and len(item["Language"]) > len("english"):
-            item["Language"] = item["Language"].replace("english",
-                                                        "").strip()  # Remove 'english' and strip extra spaces
+        if isinstance(item["Language"], str) and "english" in item["Language"] and len(item["Language"]) > len("english"):
+            item["Language"] = item["Language"].replace("english", "").strip()  # Remove 'english' and strip extra spaces
 
     return data
 

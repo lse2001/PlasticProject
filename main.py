@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 def plot_garbage(countries, frequencies, ax):
     total_frequency = sum(frequencies)
     relative_frequencies = [(freq / total_frequency) * 100 for freq in frequencies]
@@ -94,10 +95,9 @@ def plot_all(countries, frequencies, gear_types, frequencies3, colors, frequenci
     plt.show()
 
 
-
 # ----------------------- MAIN ----------------------- #
 data = []
-with open('HPU Filtered Data.csv', newline='') as file:
+with open('HPU Subset Data.csv', newline='') as file:
     reader = csv.DictReader(file)
     for row in reader:
         data.append(row)
@@ -128,6 +128,7 @@ frequencies = [c['frequency'] for c in country]
 data = convert_to_lower(data, "Color")
 data = [d for d in data if d.get("Color") != ""]
 colors = find_frequency(data, "Color")
+
 color = [c['Color'] for c in colors]
 frequencies2 = [c['Frequency'] for c in colors]
 
@@ -141,8 +142,16 @@ gear = [g['Gear Type'] for g in gear_types]
 frequencies3 = [g['Frequency'] for g in gear_types]
 
 
+
 print(sum(frequencies))
 print(sum(frequencies3))
 print(sum(frequencies2))
 
 plot_all(countries, frequencies, gear, frequencies3, color, frequencies2)
+
+# main.py cleans up subset data for relevant data. Plots bar chart for us to better understand distribution of trash instances.
+# The generated, cleaned up, csv is used to in simulation.py
+
+print(data)
+
+

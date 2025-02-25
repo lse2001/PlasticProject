@@ -1,0 +1,43 @@
+Gear Type,Color,Language,Count,Total,Proportion
+buoy,multi,english,26,26,1.0
+float,black,chinese,3,17,0.17647058823529413
+float,black,english,10,17,0.5882352941176471
+float,black,japanese,2,17,0.11764705882352941
+float,black,korean,2,17,0.11764705882352941
+float,blue,chinese,27,28,0.9642857142857143
+float,blue,english,1,28,0.03571428571428571
+float,green,chinese,2,2,1.0
+float,multi,english,6,6,1.0
+float,orange,chinese,5,10,0.5
+float,orange,english,1,10,0.1
+float,orange,japanese,3,10,0.3
+float,orange,korean,1,10,0.1
+float,pink,japanese,1,1,1.0
+float,red,english,1,3,0.3333333333333333
+float,red,vietnamese,2,3,0.6666666666666666
+float,white,chinese,9,10,0.9
+float,white,japanese,1,10,0.1
+float,yellow,chinese,1,5,0.2
+float,yellow,english,4,5,0.8
+hard plastic,black,chinese,1,15,0.06666666666666667
+hard plastic,black,english,7,15,0.4666666666666667
+hard plastic,black,japanese,4,15,0.26666666666666666
+hard plastic,black,korean,3,15,0.2
+hard plastic,blue,chinese,1,3,0.3333333333333333
+hard plastic,blue,english,2,3,0.6666666666666666
+hard plastic,green,english,2,3,0.6666666666666666
+hard plastic,green,japanese,1,3,0.3333333333333333
+hard plastic,grey,english,1,2,0.5
+hard plastic,grey,greek,1,2,0.5
+hard plastic,multi,english,5,5,1.0
+hard plastic,pink,english,1,1,1.0
+hard plastic,silver,japanese,1,1,1.0
+hard plastic,white,english,5,6,0.8333333333333334
+hard plastic,white,spanish,1,6,0.16666666666666666
+line,black,japanese,1,1,1.0
+line,multi,chinese,1,3,0.3333333333333333
+line,multi,english,1,3,0.3333333333333333
+line,multi,japanese,1,3,0.3333333333333333
+line,white,japanese,2,2,1.0
+metal,rust,english,2,2,1.0
+metal,silver,english,2,2,1.0

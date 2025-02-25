@@ -1,0 +1,155 @@
+ID Name,Gear Type,Color,Language
+FAD_019-001,buoy,multi,english
+FAD_047-001,buoy,multi,english
+FAD_049-001,buoy,multi,english
+FAD_050-001,buoy,multi,english
+FAD_053-001,buoy,multi,english
+FAD_150-001,buoy,multi,english
+FAD_151-001,buoy,multi,english
+FAD_154-001,buoy,multi,english
+FAD_155-001,buoy,multi,english
+FAD_48-001,buoy,multi,english
+FAD_51-001,buoy,multi,english
+FFS_03-001,float,black,chinese
+FFS_04-001,float,black,chinese
+FFS_05-001,float,orange,chinese
+FFS_06-001,float,black,chinese
+KUR_02-005,float,black,english
+KUR_02-024,float,white,chinese
+KUR_02-038,float,blue,chinese
+KUR_06-008,float,blue,chinese
+KUR_06-008,float,blue,chinese
+KUR_06-011,float,blue,chinese
+KUR_06-011,float,blue,chinese
+KUR_06-011,float,blue,chinese
+KUR_06-049,float,blue,chinese
+KUR_06-008,float,blue,chinese
+KUR_06-008,float,blue,chinese
+KUR_06-015,float,green,chinese
+KUR_06-019,float,white,chinese
+KUR_06-022,float,white,chinese
+KUR_06-029,float,green,chinese
+KUR_06-031,float,blue,chinese
+KUR_06-033,line,multi,chinese
+KUR_06-049,float,white,chinese
+KUR_06-057,line,multi,english
+KUR_06-065,float,blue,chinese
+KUR_06-067,float,black,english
+KUR_06-082,float,blue,chinese
+KUR_07_Buoy-001,buoy,multi,english
+KUR_08_Buoy-001,buoy,multi,english
+KUR_09_Buoy-001,buoy,multi,english
+LAY_13_Buoy-001,buoy,multi,english
+LAY_13_Buoy-001,float,yellow,english
+LAY_14_Buoy-001,buoy,multi,english
+LAY_15_Buoy-001,buoy,multi,english
+LIS_06_Buoy-001,buoy,multi,english
+MID_01-003,float,blue,chinese
+MID_01-003,float,blue,chinese
+MID_02-011,float,blue,chinese
+MID_02-012,float,blue,chinese
+MID_02-013,float,yellow,chinese
+MID_02-014,float,white,chinese
+MID_02-015,float,blue,chinese
+MID_02-019,float,blue,chinese
+MID_03-027,float,orange,chinese
+MID_03-029,float,orange,japanese
+MID_03-002,float,red,vietnamese
+MID_03-003,float,red,vietnamese
+MID_04_Line-038,float,blue,chinese
+MID_04_metal-008,hard plastic,green,japanese
+MID_04_misc-035,hard plastic,white,english
+MID_04_misc-038,hard plastic,black,english
+MID_04_misc-060,hard plastic,grey,greek
+MID_05-005,float,white,chinese
+MID_05-005,float,white,chinese
+MID_05-072,float,blue,chinese
+MID_05-037,hard plastic,green,english
+MID_06-061,float,orange,chinese
+MID_06-046,float,blue,english
+MID_06-041,float,black,english
+NPG_09-027,line,white,japanese
+NPG_11_misc-058,float,orange,chinese
+NPG_11_ropes-072,float,blue,chinese
+NPG_13-001,float,white,japanese
+NPG_16-027,float,black,english
+NPG_18-057,float,blue,chinese
+NPG_18-052,float,black,korean
+OAH_07-003,float,yellow,english
+OAH_11-001,float,black,english
+OAH_12-095,hard plastic,black,japanese
+OAH_12-004,line,black,japanese
+OAH_13-002,float,multi,english
+OAH_14-001,buoy,multi,english
+OAH_17_gillnetpile-024,float,orange,japanese
+OAH_17_Hardplastics-107,hard plastic,silver,japanese
+OAH_17_Hardplastics-003,hard plastic,black,korean
+OAH_17_Hardplastics-005,hard plastic,black,korean
+OAH_17_Hardplastics-006,hard plastic,black,korean
+OAH_17_Hardplastics-036,hard plastic,black,english
+OAH_17_Hardplastics-040,hard plastic,black,english
+OAH_17_Hardplastics-045,hard plastic,grey,english
+OAH_17_Hardplastics-057,hard plastic,multi,english
+OAH_17_Hardplastics-094,hard plastic,black,japanese
+OAH_17_Hardplastics-095,hard plastic,black,japanese
+OAH_17_Hardplastics-098,hard plastic,black,japanese
+OAH_17_Hardplastics-101,hard plastic,blue,english
+OAH_17_Hardplastics-102,hard plastic,blue,english
+OAH_17_Hardplastics-103,hard plastic,green,english
+OAH_17_Hardplastics-109,hard plastic,white,english
+OAH_17_Hardplastics-113,hard plastic,black,english
+OAH_17_Hardplastics-115,hard plastic,blue,chinese
+OAH_17_Hardplastics-120,hard plastic,black,chinese
+OAH_17_Hardplastics-138,float,black,english
+OAH_17_Hardplastics-147,hard plastic,multi,english
+OAH_17_Hardplastics-154,hard plastic,multi,english
+OAH_17_Hardplastics-178,hard plastic,black,english
+OAH_17_HPmesh-002,hard plastic,black,english
+OAH_17_HPmesh-048,hard plastic,white,english
+OAH_17_Lines-024,line,white,japanese
+OAH_17_tarp_sheet-017,hard plastic,white,english
+OAH_19-001,float,black,japanese
+OAH_19-002,float,black,japanese
+OAH_19-003,float,black,english
+OAH_19-004,float,black,english
+OAH_19-006,float,orange,english
+OAH_19-005,hard plastic,black,english
+OAH_19-009,float,multi,english
+OAH_19-009,float,multi,english
+OAH_19-009,float,multi,english
+OAH_19-009,float,multi,english
+OAH_19-009,float,multi,english
+OAH_22-002,float,black,korean
+OAH_24-009,float,white,chinese
+OAH_27-047,float,red,english
+OAH_40-001,line,multi,japanese
+OAH_43-001,float,blue,chinese
+OAH_43-001,float,blue,chinese
+OAH_44_Buoy-001,buoy,multi,english
+OAH_45-001,metal,rust,english
+OAH_45-001,metal,rust,english
+OAH_45-001,float,orange,korean
+OAH_47-001,float,yellow,english
+OAH_50-046,float,pink,japanese
+OAH_53-001,hard plastic,multi,english
+OAH_59_Buoy-001,buoy,multi,english
+OAH_65-018,hard plastic,white,english
+OAH_65-002,float,blue,chinese
+OAH_65-002,float,blue,chinese
+OAH_65-064,float,blue,chinese
+OAH_65-005,float,orange,chinese
+OAH_65-052,float,white,chinese
+OAH_65-062,float,orange,japanese
+OAH_65_Buoy-001,buoy,multi,english
+OAH_70-001,float,black,english
+OAH_70-001,metal,silver,english
+OAH_70-001,metal,silver,english
+PAL_03_Buoy-010,buoy,multi,english
+PAL_03_Buoy-010,hard plastic,multi,english
+PAL_05-009,hard plastic,white,spanish
+PAL_10-001,buoy,multi,english
+PAL_11-001,float,yellow,english
+PAL_18-001,buoy,multi,english
+PAL_19-001,float,black,english
+PAL_19-001,hard plastic,pink,english
+PAL_20_Buoy-001,buoy,multi,english
