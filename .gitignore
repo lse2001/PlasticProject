@@ -1,0 +1,12 @@
+# .gitignore
+# Exclude generated outputs
+*.csv
+!HPU Master Data.csv
+!HPU Subset Data.csv
+
+# Ignore PyCharm settings
+.idea/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
