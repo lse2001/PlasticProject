@@ -8,20 +8,13 @@ ALLOWED_COLORS = ["multi", "black", "orange", "blue", "white", "green", "red",
                   "yellow", "grey", "clear", "silver", "rust", "pink"]
 
 def clean_data(df):
-    """
-    Cleans and filters the input DataFrame.
-    Returns only relevant, standardized, and validated entries.
-    """
     df = df[['ID Name', 'Gear Type', 'Color', 'Language']].copy()
-
     for col in ['Gear Type', 'Color', 'Language']:
         df[col] = df[col].str.lower()
 
-    # Filter for accepted gear types and allowed colors
     df = df[df['Gear Type'].isin(ACCEPTED_GEAR_TYPES)]
     df = df[df['Color'].isin(ALLOWED_COLORS)]
 
-    # Remove unwanted substrings from Language
     substrings_to_remove = ["arabic numbers", "latin letters", "?", "/", " ", "(", ")"]
     def clean_language_column(lang):
         if pd.isna(lang):
@@ -31,10 +24,8 @@ def clean_data(df):
         return lang
     df['Language'] = df['Language'].apply(clean_language_column)
 
-    # Filter accepted language substrings
     df = df[df['Language'].apply(lambda x: any(lang in x for lang in LIST_ACCEPTED_LANGUAGES) if isinstance(x, str) else False)]
 
-    # Keep only first valid language
     def split_first_valid_language(value):
         if not isinstance(value, str):
             return value
@@ -43,16 +34,12 @@ def clean_data(df):
                 return lang
         return value
     df['Language'] = df['Language'].apply(split_first_valid_language)
-
     df['Language'] = df['Language'].replace('mandarin', 'chinese')
 
     return df
 
-def plot_stacked_bar(ax, labels, frequencies, title, color_map=None):
-    """
-    Draws a single stacked bar chart on the provided axis.
-    Each segment represents a category with proportional frequency.
-    """
+
+def add_single_bar_to_chart(ax, labels, frequencies, title, color_map=None):
     total = sum(frequencies)
     rel_freq = [(f / total) * 100 for f in frequencies]
     sorted_data = sorted(zip(labels, rel_freq), key=lambda x: x[1], reverse=True)
@@ -70,13 +57,8 @@ def plot_stacked_bar(ax, labels, frequencies, title, color_map=None):
     ax.set_xticks([])
     ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 
+
 def plot_all_stacked_bars(df):
-    """
-    Groups cleaned data and generates three stacked bar plots:
-    1. Garbage by Country (from Language)
-    2. Garbage by Gear Type
-    3. Garbage by Color
-    """
     lang_to_country = {
         "english": "USA", "chinese": "China", "japanese": "Japan",
         "vietnamese": "Vietnam", "greek": "Greece", "korean": "South Korea",
@@ -94,12 +76,36 @@ def plot_all_stacked_bars(df):
     }
 
     fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-    plot_stacked_bar(axes[0], country_freq.index.tolist(), country_freq.tolist(), "Garbage by Country")
-    plot_stacked_bar(axes[1], gear_freq.index.tolist(), gear_freq.tolist(), "Garbage by Gear Type")
-    plot_stacked_bar(axes[2], color_freq.index.tolist(), color_freq.tolist(), "Garbage by Color", color_map=color_mapping)
+    add_single_bar_to_chart(axes[0], country_freq.index.tolist(), country_freq.tolist(), "Garbage by Country")
+    add_single_bar_to_chart(axes[1], gear_freq.index.tolist(), gear_freq.tolist(), "Garbage by Gear Type")
+    add_single_bar_to_chart(axes[2], color_freq.index.tolist(), color_freq.tolist(), "Garbage by Color", color_map=color_mapping)
 
     plt.tight_layout()
-    plt.show()
+
+
+def plot_horizontal_language_stacked_bars(df):
+    grouped = df.groupby(['Gear Type', 'Color', 'Language']).size().reset_index(name='Count')
+    pivot = grouped.pivot_table(index=['Gear Type', 'Color'], columns='Language', values='Count', fill_value=0)
+    proportions = pivot.div(pivot.sum(axis=1), axis=0)
+    proportions = proportions.sort_index()
+
+    fig, ax = plt.subplots(figsize=(10, len(proportions) * 0.4))
+    bottom = pd.Series([0] * len(proportions), index=proportions.index)
+
+    for language in proportions.columns:
+        ax.barh(
+            proportions.index.map(lambda x: f"{x[0]} / {x[1]}"),
+            proportions[language] * 100,
+            left=bottom,
+            label=language
+        )
+        bottom += proportions[language] * 100
+
+    ax.set_xlabel("Proportion (%)")
+    ax.set_title("Language Proportions by Gear Type and Color")
+    ax.legend(title="Language", bbox_to_anchor=(1.05, 1), loc='upper left')
+    plt.tight_layout()
+
 
 # ----------------------- MAIN ----------------------- #
 
@@ -115,4 +121,9 @@ print(f"Filtered entry count: {len(df_cleaned)}")
 df_cleaned.to_csv(output_file, index=False)
 print(f"Saved cleaned CSV to '{output_file}'.")
 
+# Generate figures without immediate show
 plot_all_stacked_bars(df_cleaned)
+plot_horizontal_language_stacked_bars(df_cleaned)
+
+# Display all figures at once
+plt.show()
