@@ -7,6 +7,7 @@ ACCEPTED_GEAR_TYPES = ["buoy", "float", "line", "hard plastic", "metal"]
 ALLOWED_COLORS = ["multi", "black", "orange", "blue", "white", "green", "red",
                   "yellow", "grey", "clear", "silver", "rust", "pink"]
 
+
 def clean_data(df):
     df = df[['ID Name', 'Gear Type', 'Color', 'Language']].copy()
     for col in ['Gear Type', 'Color', 'Language']:
